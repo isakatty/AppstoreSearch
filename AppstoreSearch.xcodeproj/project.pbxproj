@@ -13,6 +13,9 @@
 		C94A15DB2C64F6F3003A94AE /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94A15DA2C64F6F3003A94AE /* UIViewController+.swift */; };
 		C94A15DE2C64F71F003A94AE /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94A15DD2C64F71F003A94AE /* BaseView.swift */; };
 		C94A15E02C64F724003A94AE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94A15DF2C64F724003A94AE /* BaseViewController.swift */; };
+		C94A15E32C64FD8F003A94AE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C94A15E22C64FD8F003A94AE /* SnapKit */; };
+		C94A15E62C64FDD5003A94AE /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = C94A15E52C64FDD5003A94AE /* RxCocoa */; };
+		C94A15E82C64FDD5003A94AE /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C94A15E72C64FDD5003A94AE /* RxSwift */; };
 		C9E192B42C64EF9F003CF532 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E192B32C64EF9F003CF532 /* AppDelegate.swift */; };
 		C9E192B62C64EF9F003CF532 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E192B52C64EF9F003CF532 /* SceneDelegate.swift */; };
 		C9E192B82C64EF9F003CF532 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E192B72C64EF9F003CF532 /* SearchViewController.swift */; };
@@ -41,6 +44,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C94A15E82C64FDD5003A94AE /* RxSwift in Frameworks */,
+				C94A15E62C64FDD5003A94AE /* RxCocoa in Frameworks */,
+				C94A15E32C64FD8F003A94AE /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +216,11 @@
 			dependencies = (
 			);
 			name = AppstoreSearch;
+			packageProductDependencies = (
+				C94A15E22C64FD8F003A94AE /* SnapKit */,
+				C94A15E52C64FDD5003A94AE /* RxCocoa */,
+				C94A15E72C64FDD5003A94AE /* RxSwift */,
+			);
 			productName = AppstoreSearch;
 			productReference = C9E192B02C64EF9F003CF532 /* AppstoreSearch.app */;
 			productType = "com.apple.product-type.application";
@@ -238,6 +249,10 @@
 				Base,
 			);
 			mainGroup = C9E192A72C64EF9F003CF532;
+			packageReferences = (
+				C94A15E12C64FD8F003A94AE /* XCRemoteSwiftPackageReference "SnapKit" */,
+				C94A15E42C64FDD5003A94AE /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			productRefGroup = C9E192B12C64EF9F003CF532 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -493,6 +508,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C94A15E12C64FD8F003A94AE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		C94A15E42C64FDD5003A94AE /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C94A15E22C64FD8F003A94AE /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C94A15E12C64FD8F003A94AE /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		C94A15E52C64FDD5003A94AE /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C94A15E42C64FDD5003A94AE /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		C94A15E72C64FDD5003A94AE /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C94A15E42C64FDD5003A94AE /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C9E192A82C64EF9F003CF532 /* Project object */;
 }
