@@ -16,9 +16,6 @@ final class TabBarController: UITabBarController {
     }
     
     private func configureTabbar() {
-        tabBar.backgroundColor = .clear
-        tabBar.tintColor = .black
-        
         let vcs = [
             ArcadeViewController(),
             TodayViewController(),
@@ -35,13 +32,8 @@ final class TabBarController: UITabBarController {
     private func configureTabs(vcGroup: [UIViewController]) -> [UINavigationController] {
         return vcGroup.enumerated().compactMap { (index, vc) in
             guard let tabBarItemCase = TabBarCase(rawValue: index) else { return nil }
-            let tab = UITabBarItem(
-                title: tabBarItemCase.tabBarName,
-                image: UIImage(systemName: tabBarItemCase.nomalIconName),
-                tag: index
-            )
             let navController = UINavigationController(rootViewController: vc)
-            navController.tabBarItem = tab
+            navController.tabBarItem = tabBarItemCase.tabItem
             return navController
         }
     }
