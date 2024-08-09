@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C91969642C65B4C30013B845 /* mockSearchiTunesAPI.json in Resources */ = {isa = PBXBuildFile; fileRef = C91969632C65B4C30013B845 /* mockSearchiTunesAPI.json */; };
 		C94A15D12C64F328003A94AE /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94A15D02C64F328003A94AE /* TabBarController.swift */; };
 		C94A15D52C64F45E003A94AE /* TabBarCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94A15D42C64F45E003A94AE /* TabBarCase.swift */; };
 		C94A15D82C64F699003A94AE /* ArcadeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94A15D72C64F699003A94AE /* ArcadeViewController.swift */; };
@@ -19,6 +20,10 @@
 		C94A15EF2C650902003A94AE /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94A15EE2C650902003A94AE /* ViewModelType.swift */; };
 		C99E4EC82C6513160056D089 /* Reusables.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E4EC72C6513160056D089 /* Reusables.swift */; };
 		C99E4ECA2C6513D10056D089 /* UICollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E4EC92C6513D10056D089 /* UICollectionViewCell.swift */; };
+		C9CD3C642C65A23500C1BB54 /* AppStoreSearchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CD3C632C65A23500C1BB54 /* AppStoreSearchDTO.swift */; };
+		C9CD3C672C65A2AA00C1BB54 /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CD3C662C65A2AA00C1BB54 /* EndPointType.swift */; };
+		C9CD3C692C65A3A000C1BB54 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CD3C682C65A3A000C1BB54 /* HTTPMethod.swift */; };
+		C9CD3C6B2C65A3B900C1BB54 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CD3C6A2C65A3B900C1BB54 /* NetworkRequest.swift */; };
 		C9E192B42C64EF9F003CF532 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E192B32C64EF9F003CF532 /* AppDelegate.swift */; };
 		C9E192B62C64EF9F003CF532 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E192B52C64EF9F003CF532 /* SceneDelegate.swift */; };
 		C9E192B82C64EF9F003CF532 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E192B72C64EF9F003CF532 /* SearchViewController.swift */; };
@@ -27,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C91969632C65B4C30013B845 /* mockSearchiTunesAPI.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mockSearchiTunesAPI.json; sourceTree = "<group>"; };
 		C94A15D02C64F328003A94AE /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C94A15D42C64F45E003A94AE /* TabBarCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCase.swift; sourceTree = "<group>"; };
 		C94A15D72C64F699003A94AE /* ArcadeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcadeViewController.swift; sourceTree = "<group>"; };
@@ -36,6 +42,10 @@
 		C94A15EE2C650902003A94AE /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		C99E4EC72C6513160056D089 /* Reusables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusables.swift; sourceTree = "<group>"; };
 		C99E4EC92C6513D10056D089 /* UICollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewCell.swift; sourceTree = "<group>"; };
+		C9CD3C632C65A23500C1BB54 /* AppStoreSearchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreSearchDTO.swift; sourceTree = "<group>"; };
+		C9CD3C662C65A2AA00C1BB54 /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
+		C9CD3C682C65A3A000C1BB54 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		C9CD3C6A2C65A3B900C1BB54 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		C9E192B02C64EF9F003CF532 /* AppstoreSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppstoreSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9E192B32C64EF9F003CF532 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9E192B52C64EF9F003CF532 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +69,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C91969652C65B4C80013B845 /* MockData */ = {
+			isa = PBXGroup;
+			children = (
+				C91969632C65B4C30013B845 /* mockSearchiTunesAPI.json */,
+			);
+			path = MockData;
+			sourceTree = "<group>";
+		};
 		C94A15C62C64F215003A94AE /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +99,7 @@
 		C94A15C82C64F226003A94AE /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				C9CD3C652C65A29700C1BB54 /* Network */,
 				C94A15ED2C6508FC003A94AE /* Protocol */,
 				C94A15DC2C64F718003A94AE /* Base */,
 				C94A15D92C64F6E8003A94AE /* Extension */,
@@ -142,6 +161,8 @@
 		C94A15D22C64F444003A94AE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C9CD3C682C65A3A000C1BB54 /* HTTPMethod.swift */,
+				C9CD3C622C65A21800C1BB54 /* Response */,
 				C94A15D32C64F44F003A94AE /* TabBar */,
 			);
 			path = Model;
@@ -187,8 +208,25 @@
 			children = (
 				C94A15EE2C650902003A94AE /* ViewModelType.swift */,
 				C99E4EC72C6513160056D089 /* Reusables.swift */,
+				C9CD3C662C65A2AA00C1BB54 /* EndPointType.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		C9CD3C622C65A21800C1BB54 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				C9CD3C632C65A23500C1BB54 /* AppStoreSearchDTO.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		C9CD3C652C65A29700C1BB54 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C9CD3C6A2C65A3B900C1BB54 /* NetworkRequest.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		C9E192A72C64EF9F003CF532 = {
@@ -210,6 +248,7 @@
 		C9E192B22C64EF9F003CF532 /* AppstoreSearch */ = {
 			isa = PBXGroup;
 			children = (
+				C91969652C65B4C80013B845 /* MockData */,
 				C94A15C82C64F226003A94AE /* Global */,
 				C94A15C72C64F21F003A94AE /* Scene */,
 				C94A15C62C64F215003A94AE /* Resource */,
@@ -286,6 +325,7 @@
 			files = (
 				C9E192BD2C64EFA0003CF532 /* Assets.xcassets in Resources */,
 				C9E192C02C64EFA0003CF532 /* Base in Resources */,
+				C91969642C65B4C30013B845 /* mockSearchiTunesAPI.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,8 +341,12 @@
 				C99E4ECA2C6513D10056D089 /* UICollectionViewCell.swift in Sources */,
 				C9E192B82C64EF9F003CF532 /* SearchViewController.swift in Sources */,
 				C94A15D12C64F328003A94AE /* TabBarController.swift in Sources */,
+				C9CD3C642C65A23500C1BB54 /* AppStoreSearchDTO.swift in Sources */,
+				C9CD3C672C65A2AA00C1BB54 /* EndPointType.swift in Sources */,
 				C94A15D82C64F699003A94AE /* ArcadeViewController.swift in Sources */,
+				C9CD3C692C65A3A000C1BB54 /* HTTPMethod.swift in Sources */,
 				C9E192B42C64EF9F003CF532 /* AppDelegate.swift in Sources */,
+				C9CD3C6B2C65A3B900C1BB54 /* NetworkRequest.swift in Sources */,
 				C94A15E02C64F724003A94AE /* BaseViewController.swift in Sources */,
 				C9E192B62C64EF9F003CF532 /* SceneDelegate.swift in Sources */,
 				C94A15D52C64F45E003A94AE /* TabBarCase.swift in Sources */,
