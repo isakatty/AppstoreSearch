@@ -1,15 +1,15 @@
 //
-//  BaseView.swift
+//  BaseCollectionViewCell.swift
 //  AppstoreSearch
 //
-//  Created by Jisoo Ham on 8/8/24.
+//  Created by Jisoo Ham on 8/9/24.
 //
 
 import UIKit
 
-class BaseView: UIView {
+class BaseCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
-        super.init(frame: .zero)
+        super.init(frame: frame)
         
         configureHierarchy()
         configureLayout()
@@ -19,12 +19,9 @@ class BaseView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func configureHierarchy() {
-        
-    }
+    func configureHierarchy() { }
     func configureLayout() {
-        backgroundColor = .systemBackground
+        contentView.backgroundColor = .systemBackground
         
     }
 }

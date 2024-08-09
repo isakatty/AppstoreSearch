@@ -1,20 +1,19 @@
 //
-//  BaseView.swift
+//  BaseTableViewCell.swift
 //  AppstoreSearch
 //
-//  Created by Jisoo Ham on 8/8/24.
+//  Created by Jisoo Ham on 8/9/24.
 //
 
 import UIKit
 
-class BaseView: UIView {
-    override init(frame: CGRect) {
-        super.init(frame: .zero)
+class BaseTableViewCell: UITableViewCell {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         configureHierarchy()
         configureLayout()
     }
-    
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -24,7 +23,7 @@ class BaseView: UIView {
         
     }
     func configureLayout() {
-        backgroundColor = .systemBackground
+        contentView.backgroundColor = .systemBackground
         
     }
 }
