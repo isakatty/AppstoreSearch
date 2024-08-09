@@ -34,7 +34,8 @@ extension AppStoreSearchDTO {
                     contentAdvisoryRating: dto.contentAdvisoryRating,
                     linkToAppStore: dto.trackViewUrl,
                     minimumOsVersion: dto.minimumOsVersion,
-                    version: dto.version
+                    version: dto.version,
+                    artworkURL: dto.artworkUrl512
                 )
             })
         )
