@@ -21,7 +21,7 @@ final class TabBarController: UITabBarController {
             TodayViewController(),
             GameViewController(),
             AppViewController(),
-            SearchViewController()
+            SearchiTunesViewController()
         ]
         
         setViewControllers(

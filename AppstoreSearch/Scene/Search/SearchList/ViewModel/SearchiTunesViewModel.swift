@@ -17,10 +17,11 @@ final class SearchiTunesViewModel: ViewModelType {
         
     }
     struct Output {
-        
+        let searchedList: BehaviorSubject<[String]>
     }
     func transform(input: Input) -> Output {
+        let output = Output(searchedList: .init(value: []))
         
-        return Output()
+        return output
     }
 }
