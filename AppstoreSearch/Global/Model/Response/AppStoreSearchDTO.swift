@@ -12,6 +12,35 @@ struct AppStoreSearchDTO: Decodable {
     let results: [AppStoreSearchResultDTO]
 }
 
+extension AppStoreSearchDTO {
+    var toDomain: AppStoreSearch {
+        return .init(
+            resultCount: resultCount,
+            results: results.map({ dto in
+                AppStoreSearchResult(
+                    kind: dto.kind,
+                    screenshotUrls: dto.screenshotUrls,
+                    artistViewUrl: dto.artistViewUrl,
+                    currentVersionReleaseDate: dto.currentVersionReleaseDate,
+                    developrId: dto.artistId,
+                    developerName: dto.artistName,
+                    genres: dto.genres,
+                    releaseDate: dto.releaseDate,
+                    appDescription: dto.description,
+                    appName: dto.trackCensoredName,
+                    sellerName: dto.sellerName,
+                    averageUserRating: dto.averageUserRating,
+                    formattedPrice: dto.formattedPrice,
+                    contentAdvisoryRating: dto.contentAdvisoryRating,
+                    linkToAppStore: dto.trackViewUrl,
+                    minimumOsVersion: dto.minimumOsVersion,
+                    version: dto.version
+                )
+            })
+        )
+    }
+}
+
 struct AppStoreSearchResultDTO: Decodable {
     let advisories: [String]
     let features: [String]
