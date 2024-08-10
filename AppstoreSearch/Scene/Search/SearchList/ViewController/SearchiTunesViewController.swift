@@ -11,13 +11,12 @@ import RxSwift
 import RxCocoa
 import SnapKit
 
+enum SearchViewState {
+    case initialLoad
+    case already
+}
+
 final class SearchiTunesViewController: BaseViewController {
-    
-    enum SearchViewState {
-        case initialLoad
-        case already
-    }
-    
     private let disposeBag = DisposeBag()
     private let searchViewModel = SearchiTunesViewModel()
     
@@ -65,7 +64,7 @@ final class SearchiTunesViewController: BaseViewController {
             .forEach { view.addSubview($0) }
     }
     override func configureLayout() {
-        view.backgroundColor = .systemBackground
+        super.configureLayout()
         
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(safeArea)
@@ -73,36 +72,51 @@ final class SearchiTunesViewController: BaseViewController {
         collectionView.snp.makeConstraints { make in
             make.edges.equalTo(safeArea)
         }
-        
-//        collectionView.isHidden = true
     }
     
     private func bind() {
+        let viewState = BehaviorRelay<SearchViewState>(value: state)
         let selectedAppInfo = PublishRelay<AppStoreSearchResult>()
         
         let input = SearchiTunesViewModel.Input(
-            viewDidLoad: Observable.just(()),
+            viewState: viewState,
             searchText: searchController.searchBar.rx.text.orEmpty,
             searchEnterTap: searchController.searchBar.rx.searchButtonClicked,
+            searchCancelTap: searchController.searchBar.rx.cancelButtonClicked,
             selectedAppInfo: selectedAppInfo
         )
         let output = searchViewModel.transform(input: input)
         
-//        output.searchedList
-//            .bind(with: self) { owner, list in
-//                print("Received list: \(list)")
-//                if list.count != 0 {
-//                    owner.collectionView.isHidden = true
-//                    owner.tableView.isHidden = false
-//                } else {
-//                    owner.collectionView.isHidden = false
-//                    owner.tableView.isHidden = true
-//                }
-//            }
-//            .disposed(by: disposeBag)
+        searchController.searchBar.rx.cancelButtonClicked
+            .subscribe(with: self) { owner, _ in
+                owner.state = .initialLoad
+                viewState.accept(owner.state)
+            }
+            .disposed(by: disposeBag)
+        
+        output.viewState
+            .observe(on: MainScheduler.instance)
+            .bind(with: self) { owner, state in
+                if state == .initialLoad {
+                    owner.collectionView.isHidden = true
+                    owner.tableView.isHidden = false
+                } else {
+                    owner.collectionView.isHidden = false
+                    owner.tableView.isHidden = true
+                }
+            }
+            .disposed(by: disposeBag)
+        
         output.searchedList
             .bind(to: tableView.rx.items(cellIdentifier: SearchListTableViewCell.identifier, cellType: SearchListTableViewCell.self)) { row, element, cell in
                 cell.configureUI(text: element)
+            }
+            .disposed(by: disposeBag)
+        
+        output.searchResult
+            .bind(with: self) { owner, _ in
+                owner.state = .already
+                viewState.accept(owner.state)
             }
             .disposed(by: disposeBag)
         
