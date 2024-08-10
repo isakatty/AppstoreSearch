@@ -46,6 +46,13 @@ final class SearchiTunesViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
         
+        input.searchCancelTap
+            .map { SearchViewState.initialLoad }
+            .subscribe(onNext: { state in
+                output.viewState.accept(state)
+            })
+            .disposed(by: disposeBag)
+        
         /*
          Error를 만났을 때 stream이 끝나버림
          */

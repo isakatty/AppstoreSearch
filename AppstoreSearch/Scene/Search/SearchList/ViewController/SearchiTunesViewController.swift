@@ -87,13 +87,6 @@ final class SearchiTunesViewController: BaseViewController {
         )
         let output = searchViewModel.transform(input: input)
         
-        searchController.searchBar.rx.cancelButtonClicked
-            .subscribe(with: self) { owner, _ in
-                owner.state = .initialLoad
-                viewState.accept(owner.state)
-            }
-            .disposed(by: disposeBag)
-        
         output.viewState
             .observe(on: MainScheduler.instance)
             .bind(with: self) { owner, state in
