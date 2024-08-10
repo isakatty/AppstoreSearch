@@ -15,8 +15,8 @@ final class SearchiTunesViewController: BaseViewController {
     private let disposeBag = DisposeBag()
     private let searchViewModel = SearchiTunesViewModel()
     
-    
     private var dummy = AppStoreSearch(resultCount: 0, results: [])
+    private lazy var dummyRx = BehaviorRelay(value: dummy)
     
     private let searchController: UISearchController = {
         let search = UISearchController()
@@ -47,8 +47,12 @@ final class SearchiTunesViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        test()
-        mockupDataTest()
+        test()
+//        mockupDataTest()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         bind()
     }
     override func configureHierarchy() {
@@ -74,19 +78,37 @@ final class SearchiTunesViewController: BaseViewController {
     }
     
     private func bind() {
-        var dummyRx = BehaviorRelay(value: dummy)
+        let input = SearchiTunesViewModel.Input(
+            viewDidLoad: rx
+                .methodInvoked(#selector(UIViewController.viewDidLoad))
+                .map { _ in }
+            ,
+            searchText: searchController.searchBar.rx.text.orEmpty,
+            searchEnterTap: searchController.searchBar.rx.searchButtonClicked
+        )
+        let output = searchViewModel.transform(input: input)
         
-        dummyRx
-            .map { $0.results }
-            .bind(to: collectionView.rx.items(cellIdentifier: SearchListCollectionViewCell.identifier, cellType: SearchListCollectionViewCell.self)) { row, element, cell in
+        output.searchedList
+            .bind(with: self) { owner, list in
+                print("list")
+            }
+            .disposed(by: disposeBag)
+        
+        output.searchResult
+            .bind(to: collectionView.rx.items(
+                    cellIdentifier: SearchListCollectionViewCell.identifier,
+                    cellType: SearchListCollectionViewCell.self)
+            ) { row, element, cell in
                 cell.configureUI(appInfo: element)
             }
             .disposed(by: disposeBag)
+        
+        
     }
 }
 extension SearchiTunesViewController {
     private func test() {
-        guard let urlRequest = NetworkRequest.itunesSearch(searchText: "지도").toURLRequest else {
+        guard let urlRequest = NetworkRequest.itunesSearch(searchText: "카카오").toURLRequest else {
             print("URLRequest 에러")
             return
         }
@@ -102,7 +124,10 @@ extension SearchiTunesViewController {
             }
             if let data = data,
                let results = try? JSONDecoder().decode(AppStoreSearchDTO.self, from: data) {
-                self.dummy = results.toDomain
+                DispatchQueue.main.async {
+                    self.dummy = results.toDomain
+                    self.dummyRx.accept(self.dummy)
+                }
             } else {
                 print("모델 잘못된듯?")
             }

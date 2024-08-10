@@ -32,7 +32,7 @@ final class MiddleInfoView: BaseView {
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
+        stackView.distribution = .fillEqually
         stackView.alignment = .fill
         stackView.spacing = 10
         return stackView
@@ -50,7 +50,8 @@ final class MiddleInfoView: BaseView {
         
         stackView.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview()
-            make.horizontalEdges.equalToSuperview().inset(20)
+            make.trailing.equalToSuperview().inset(20)
+            make.leading.equalToSuperview().inset(10)
         }
     }
     
