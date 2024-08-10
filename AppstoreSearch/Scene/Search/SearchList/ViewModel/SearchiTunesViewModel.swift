@@ -20,6 +20,8 @@ final class SearchiTunesViewModel: ViewModelType {
         let searchEnterTap: ControlEvent<Void>
         let searchCancelTap: ControlEvent<Void>
         let selectedAppInfo: PublishRelay<AppStoreSearchResult>
+        let selectedTableCell: PublishRelay<String>
+        let deleteTermIndex: PublishRelay<Int>
     }
     struct Output {
         let viewState: BehaviorRelay<SearchViewState>
@@ -49,8 +51,28 @@ final class SearchiTunesViewModel: ViewModelType {
         input.searchCancelTap
             .map { SearchViewState.initialLoad }
             .subscribe(onNext: { state in
-                output.viewState.accept(state)
+                input.viewState.accept(.initialLoad)
             })
+            .disposed(by: disposeBag)
+        
+        input.selectedTableCell
+            .flatMap({ text in
+                NetworkManager.shared.callRequest(searchedText: text, type: AppStoreSearchDTO.self)
+            })
+            .subscribe(with: self, onNext: { owner, list in
+                appList.accept(list.toDomain.results)
+            }, onError: { owner, err in
+                print(err)
+            })
+            .disposed(by: disposeBag)
+        
+        input.deleteTermIndex
+            .subscribe(with: self) { owner, index in
+                var existTemrs = owner.userDefaultsService.getTerms()
+                existTemrs.remove(at: index)
+                owner.userDefaultsService.setTerms(existTemrs)
+                searchTerms.accept(existTemrs)
+            }
             .disposed(by: disposeBag)
         
         /*

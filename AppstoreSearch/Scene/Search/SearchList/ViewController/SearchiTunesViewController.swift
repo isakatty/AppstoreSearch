@@ -77,13 +77,17 @@ final class SearchiTunesViewController: BaseViewController {
     private func bind() {
         let viewState = BehaviorRelay<SearchViewState>(value: state)
         let selectedAppInfo = PublishRelay<AppStoreSearchResult>()
+        let selectedTableCell = PublishRelay<String>()
+        let deleteTermIndex = PublishRelay<Int>()
         
         let input = SearchiTunesViewModel.Input(
             viewState: viewState,
             searchText: searchController.searchBar.rx.text.orEmpty,
             searchEnterTap: searchController.searchBar.rx.searchButtonClicked,
             searchCancelTap: searchController.searchBar.rx.cancelButtonClicked,
-            selectedAppInfo: selectedAppInfo
+            selectedAppInfo: selectedAppInfo,
+            selectedTableCell: selectedTableCell,
+            deleteTermIndex: deleteTermIndex
         )
         let output = searchViewModel.transform(input: input)
         
@@ -101,8 +105,24 @@ final class SearchiTunesViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         output.searchedList
+            .observe(on: MainScheduler.instance)
             .bind(to: tableView.rx.items(cellIdentifier: SearchListTableViewCell.identifier, cellType: SearchListTableViewCell.self)) { row, element, cell in
                 cell.configureUI(text: element)
+                
+                cell.deleteBtn.rx.tap
+                    .map { row }
+                    .subscribe(with: self) { owner, index in
+                        print("💥", index)
+                        deleteTermIndex.accept(index)
+                    }
+                    .disposed(by: cell.disposeBag)
+            }
+            .disposed(by: disposeBag)
+        
+        Observable.zip(tableView.rx.modelSelected(String.self), tableView.rx.itemSelected)
+            .bind { text, index in
+                print(text, index)
+                selectedTableCell.accept(text)
             }
             .disposed(by: disposeBag)
         

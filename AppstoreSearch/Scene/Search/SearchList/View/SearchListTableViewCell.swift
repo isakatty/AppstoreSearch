@@ -25,7 +25,7 @@ final class SearchListTableViewCell: BaseTableViewCell {
         label.font = .boldSystemFont(ofSize: 14)
         return label
     }()
-    private let deleteBtn: UIButton = {
+    let deleteBtn: UIButton = {
         var config = UIButton.Configuration.plain()
         config.image = UIImage(systemName: "xmark")
         config.imagePadding = 16
