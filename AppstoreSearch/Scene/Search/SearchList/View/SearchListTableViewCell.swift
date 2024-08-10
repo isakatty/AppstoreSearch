@@ -16,6 +16,7 @@ final class SearchListTableViewCell: BaseTableViewCell {
         let imgView = UIImageView()
         imgView.image = UIImage(systemName: "clock.arrow.circlepath")
         imgView.contentMode = .scaleAspectFit
+        imgView.tintColor = UIColor.black
         return imgView
     }()
     private let searchedTextLabel: UILabel = {
@@ -27,6 +28,7 @@ final class SearchListTableViewCell: BaseTableViewCell {
     private let deleteBtn: UIButton = {
         var config = UIButton.Configuration.plain()
         config.image = UIImage(systemName: "xmark")
+        config.imagePadding = 16
         let btn = UIButton(configuration: config)
         return btn
     }()
@@ -37,18 +39,23 @@ final class SearchListTableViewCell: BaseTableViewCell {
     }
     override func configureLayout() {
         super.configureLayout()
+
         timeImgView.snp.makeConstraints { make in
-            make.leading.verticalEdges.equalToSuperview().inset(16)
+            make.leading.equalToSuperview().inset(16)
+            make.verticalEdges.equalToSuperview().inset(12)
             make.width.equalTo(timeImgView.snp.height)
         }
-        searchedTextLabel.snp.makeConstraints { make in
-            make.leading.equalTo(timeImgView.snp.trailing).inset(20)
-            make.center.equalToSuperview()
-        }
+
         deleteBtn.snp.makeConstraints { make in
-            make.trailing.verticalEdges.equalToSuperview().inset(16)
+            make.trailing.equalToSuperview().inset(16)
+            make.verticalEdges.equalToSuperview().inset(16)
             make.width.equalTo(deleteBtn.snp.height)
-            make.leading.equalTo(searchedTextLabel.snp.trailing)
+        }
+
+        searchedTextLabel.snp.makeConstraints { make in
+            make.leading.equalTo(timeImgView.snp.trailing).offset(16)
+            make.trailing.equalTo(deleteBtn.snp.leading).offset(-16)
+            make.centerY.equalToSuperview()
         }
     }
     

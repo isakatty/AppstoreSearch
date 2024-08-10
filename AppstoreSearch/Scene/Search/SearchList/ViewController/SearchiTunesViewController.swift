@@ -12,11 +12,16 @@ import RxCocoa
 import SnapKit
 
 final class SearchiTunesViewController: BaseViewController {
+    
+    enum SearchViewState {
+        case initialLoad
+        case already
+    }
+    
     private let disposeBag = DisposeBag()
     private let searchViewModel = SearchiTunesViewModel()
     
-    private var dummy = AppStoreSearch(resultCount: 0, results: [])
-    private lazy var dummyRx = BehaviorRelay(value: dummy)
+    private var state: SearchViewState = .initialLoad
     
     private let searchController: UISearchController = {
         let search = UISearchController()
@@ -29,7 +34,7 @@ final class SearchiTunesViewController: BaseViewController {
             SearchListTableViewCell.self,
             forCellReuseIdentifier: SearchListTableViewCell.identifier
         )
-        tableView.rowHeight = 60
+        tableView.rowHeight = 50
         return tableView
     }()
     private lazy var collectionView: UICollectionView = {
@@ -47,12 +52,6 @@ final class SearchiTunesViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        test()
-//        mockupDataTest()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
         bind()
     }
     override func configureHierarchy() {
@@ -60,6 +59,7 @@ final class SearchiTunesViewController: BaseViewController {
         navigationItem.title = "검색"
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
         
         [tableView, collectionView]
             .forEach { view.addSubview($0) }
@@ -74,23 +74,35 @@ final class SearchiTunesViewController: BaseViewController {
             make.edges.equalTo(safeArea)
         }
         
-        tableView.isHidden = true
+//        collectionView.isHidden = true
     }
     
     private func bind() {
+        let selectedAppInfo = PublishRelay<AppStoreSearchResult>()
+        
         let input = SearchiTunesViewModel.Input(
-            viewDidLoad: rx
-                .methodInvoked(#selector(UIViewController.viewDidLoad))
-                .map { _ in }
-            ,
+            viewDidLoad: Observable.just(()),
             searchText: searchController.searchBar.rx.text.orEmpty,
-            searchEnterTap: searchController.searchBar.rx.searchButtonClicked
+            searchEnterTap: searchController.searchBar.rx.searchButtonClicked,
+            selectedAppInfo: selectedAppInfo
         )
         let output = searchViewModel.transform(input: input)
         
+//        output.searchedList
+//            .bind(with: self) { owner, list in
+//                print("Received list: \(list)")
+//                if list.count != 0 {
+//                    owner.collectionView.isHidden = true
+//                    owner.tableView.isHidden = false
+//                } else {
+//                    owner.collectionView.isHidden = false
+//                    owner.tableView.isHidden = true
+//                }
+//            }
+//            .disposed(by: disposeBag)
         output.searchedList
-            .bind(with: self) { owner, list in
-                print("list")
+            .bind(to: tableView.rx.items(cellIdentifier: SearchListTableViewCell.identifier, cellType: SearchListTableViewCell.self)) { row, element, cell in
+                cell.configureUI(text: element)
             }
             .disposed(by: disposeBag)
         
@@ -103,48 +115,18 @@ final class SearchiTunesViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        Observable.zip(collectionView.rx.modelSelected(AppStoreSearchResult.self), collectionView.rx.itemSelected)
+            .bind { appInfo, index in
+                selectedAppInfo.accept(appInfo)
+            }
+            .disposed(by: disposeBag)
         
-    }
-}
-extension SearchiTunesViewController {
-    private func test() {
-        guard let urlRequest = NetworkRequest.itunesSearch(searchText: "카카오").toURLRequest else {
-            print("URLRequest 에러")
-            return
-        }
-        
-        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-            if let error = error {
-                print("에러")
+        output.selectedAppInfo
+            .subscribe(with: self) { owner, appInfo in
+                let vc = SearchDetailInfoViewController(viewModel: SearchDetailInfoViewModel(appInfo: appInfo))
+                owner.navigationController?.pushViewController(vc, animated: true)
             }
-            guard let response = response as? HTTPURLResponse,
-                  (200...299).contains(response.statusCode) else {
-                print("response 에러")
-                return
-            }
-            if let data = data,
-               let results = try? JSONDecoder().decode(AppStoreSearchDTO.self, from: data) {
-                DispatchQueue.main.async {
-                    self.dummy = results.toDomain
-                    self.dummyRx.accept(self.dummy)
-                }
-            } else {
-                print("모델 잘못된듯?")
-            }
-            
-        }.resume()
-    }
-    private func mockupDataTest() {
-        guard let path = Bundle.main.path(forResource: "mockSearchiTunesAPI", ofType: "json") else { return }
-        guard let jsonString = try? String(contentsOfFile: path) else {
-            return
-        }
-        let decoder = JSONDecoder()
-        let data = jsonString.data(using: .utf8)
-        if let data = data,
-           let result = try? decoder.decode(AppStoreSearchDTO.self, from: data) {
-            self.dummy = result.toDomain
-        }
+            .disposed(by: disposeBag)
     }
 }
 
