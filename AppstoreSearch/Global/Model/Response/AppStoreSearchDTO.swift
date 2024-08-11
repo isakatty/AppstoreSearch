@@ -38,7 +38,8 @@ extension AppStoreSearchDTO {
                     version: dto.version,
                     artworkURL: dto.artworkUrl512,
                     languages: dto.languageCodesISO2A,
-                    rateCount: dto.userRatingCountForCurrentVersion
+                    rateCount: dto.userRatingCountForCurrentVersion,
+                    trackId: dto.trackId
                 )
             })
         )
@@ -85,4 +86,5 @@ struct AppStoreSearchResultDTO: Decodable {
     let version: String //
     let wrapperType: String
     let userRatingCount: Int
+    let trackId: Int
 }

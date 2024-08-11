@@ -12,7 +12,7 @@ import RxSwift
 final class SearchListCollectionViewCell: BaseCollectionViewCell {
     var disposeBag = DisposeBag()
     
-    private let topView = TopInfoView()
+    let topView = TopInfoView()
     private let middleView = MiddleInfoView()
     private let bottomView = BottomInfoView()
     
@@ -47,6 +47,7 @@ final class SearchListCollectionViewCell: BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
+        bottomView.configureImgNil()
         disposeBag = DisposeBag()
     }
 }

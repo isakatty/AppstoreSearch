@@ -55,4 +55,6 @@ struct AppStoreSearchResult {
     let languages: [String]
     /// 평가 개수
     let rateCount: Int
+    /// appstore id
+    let trackId: Int
 }

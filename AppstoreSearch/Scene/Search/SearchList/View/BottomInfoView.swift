@@ -85,5 +85,9 @@ final class BottomInfoView: BaseView {
             }
         })
     }
+    func configureImgNil() {
+        [firstImg, secondImg, thirdImg]
+            .forEach { $0.image = nil }
+    }
 }
 

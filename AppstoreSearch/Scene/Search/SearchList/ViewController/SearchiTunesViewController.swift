@@ -79,6 +79,7 @@ final class SearchiTunesViewController: BaseViewController {
         let selectedAppInfo = PublishRelay<AppStoreSearchResult>()
         let selectedTableCell = PublishRelay<String>()
         let deleteTermIndex = PublishRelay<Int>()
+        let downLoadBtnTap = PublishRelay<Int>()
         
         let input = SearchiTunesViewModel.Input(
             viewState: viewState,
@@ -87,7 +88,8 @@ final class SearchiTunesViewController: BaseViewController {
             searchCancelTap: searchController.searchBar.rx.cancelButtonClicked,
             selectedAppInfo: selectedAppInfo,
             selectedTableCell: selectedTableCell,
-            deleteTermIndex: deleteTermIndex
+            deleteTermIndex: deleteTermIndex,
+            downloadBtnTap: downLoadBtnTap.asObservable()
         )
         let output = searchViewModel.transform(input: input)
         
@@ -112,7 +114,6 @@ final class SearchiTunesViewController: BaseViewController {
                 cell.deleteBtn.rx.tap
                     .map { row }
                     .subscribe(with: self) { owner, index in
-                        print("💥", index)
                         deleteTermIndex.accept(index)
                     }
                     .disposed(by: cell.disposeBag)
@@ -139,6 +140,12 @@ final class SearchiTunesViewController: BaseViewController {
                     cellType: SearchListCollectionViewCell.self)
             ) { row, element, cell in
                 cell.configureUI(appInfo: element)
+                cell.topView.downloadButton.rx.tap
+                    .map { element.trackId }
+                    .bind(with: self) { owner, appId in
+                        downLoadBtnTap.accept(appId)
+                    }
+                    .disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)
         

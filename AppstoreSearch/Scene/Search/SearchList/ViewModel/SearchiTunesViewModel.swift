@@ -22,6 +22,7 @@ final class SearchiTunesViewModel: ViewModelType {
         let selectedAppInfo: PublishRelay<AppStoreSearchResult>
         let selectedTableCell: PublishRelay<String>
         let deleteTermIndex: PublishRelay<Int>
+        let downloadBtnTap: Observable<Int>
     }
     struct Output {
         let viewState: BehaviorRelay<SearchViewState>
@@ -106,6 +107,13 @@ final class SearchiTunesViewModel: ViewModelType {
             } onError: { owner, err in
                 // 에러 만났을 때 어떻게 해줘야 할까 -> 에러 만났을 때 검색이 된건지 안된건지 알 수 없어서 여러번 검색하는 나.를 발견.
                 print(err)
+            }
+            .disposed(by: disposeBag)
+        
+        input.downloadBtnTap
+            .subscribe(with: self) { owner, appId in
+                print(appId, "☄️")
+                // Realm repository
             }
             .disposed(by: disposeBag)
         

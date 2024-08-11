@@ -54,6 +54,8 @@ final class SearchDetailInfoViewController: BaseViewController {
     override func configureLayout() {
         super.configureLayout()
         
+        vScrollView.showsVerticalScrollIndicator = false
+        
         vScrollView.snp.makeConstraints { make in
             make.edges.equalTo(safeArea)
         }
@@ -89,6 +91,7 @@ final class SearchDetailInfoViewController: BaseViewController {
         let output = viewModel.transform(input: input)
         
         output.appInfo
+            .observe(on: MainScheduler.instance)
             .bind(with: self) { owner, appInfo in
                 owner.appInfo.configureUI(appInfo: appInfo)
                 owner.appDetail.configureUI(appInfo: appInfo)
@@ -99,6 +102,7 @@ final class SearchDetailInfoViewController: BaseViewController {
         
         output.appInfo
             .map { $0.screenshotUrls }
+            .observe(on: MainScheduler.instance)
             .bind(to: screenshotCollectionView.collectionView.rx.items(cellIdentifier: AppScreenshotCollectionViewCell.identifier, cellType: AppScreenshotCollectionViewCell.self)) { row, element, cell in
                 cell.configureUI(imageURL: element)
             }
