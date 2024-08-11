@@ -14,6 +14,7 @@ final class AppInfoView: BaseView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textColor = .black
+        label.text = "카카오뱅크"
         return label
     }()
     private let appIconImageView: UIImageView = {
@@ -24,6 +25,7 @@ final class AppInfoView: BaseView {
         imageView.layer.cornerRadius = 16
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor.lightGray.cgColor
+        imageView.image = UIImage(systemName: "star.fill")
         return imageView
     }()
     let downloadButton: UIButton = {
@@ -40,6 +42,7 @@ final class AppInfoView: BaseView {
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 13)
         label.textColor = .lightGray
+        label.text = "Kakao Corp."
         return label
     }()
     override func configureHierarchy() {
@@ -51,25 +54,24 @@ final class AppInfoView: BaseView {
         
         appIconImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().inset(20)
-            make.verticalEdges.equalToSuperview().inset(30)
+            make.leading.verticalEdges.equalToSuperview().inset(20)
             make.width.equalTo(appIconImageView.snp.height)
         }
         
         appNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(appIconImageView)
-            make.leading.equalTo(appIconImageView.snp.trailing).offset(16)
-            make.trailing.equalTo(downloadButton.snp.leading).offset(-8)
+            make.top.equalTo(appIconImageView.snp.top)
+            make.leading.equalTo(appIconImageView.snp.trailing).inset(-16)
+            make.trailing.equalToSuperview().inset(8)
         }
         
         devNameLabel.snp.makeConstraints { make in
             make.top.equalTo(appNameLabel.snp.bottom).offset(8)
-            make.leading.equalTo(appIconImageView.snp.trailing).offset(16)
-            make.trailing.equalTo(downloadButton.snp.leading).offset(-8)
+            make.leading.equalTo(appIconImageView.snp.trailing).inset(-16)
+            make.trailing.equalToSuperview().inset(8)
         }
         
         downloadButton.snp.makeConstraints { make in
-            make.leading.equalTo(appIconImageView.snp.trailing).offset(16)
+            make.leading.equalTo(appIconImageView.snp.trailing).inset(-16)
             make.bottom.equalTo(appIconImageView.snp.bottom)
             make.height.equalTo(32)
             make.width.equalTo(72)

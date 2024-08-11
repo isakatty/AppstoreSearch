@@ -35,7 +35,9 @@ final class SearchDetailInfoViewController: BaseViewController {
         view.backgroundColor = .systemMint
         return view
     }()
+    private let appInfo = AppInfoView()
     private let appDetail = AppDetailInfoView()
+    private let releaseNotes = AppReleaseView()
     private let testImg: UIImageView = {
         let img = UIImageView()
         img.contentMode = .scaleAspectFit
@@ -58,11 +60,17 @@ final class SearchDetailInfoViewController: BaseViewController {
         print(viewModel.appInfo.appName)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
     override func configureHierarchy() {
         view.addSubview(vScrollView)
         vScrollView.addSubview(containerView)
         
-        [appDetail, testImg]
+        [appInfo, appDetail, releaseNotes, testImg]
             .forEach { containerView.addSubview($0) }
     }
     override func configureLayout() {
@@ -75,12 +83,21 @@ final class SearchDetailInfoViewController: BaseViewController {
             make.width.equalTo(vScrollView.snp.width)
             make.verticalEdges.equalTo(vScrollView)
         }
-        appDetail.snp.makeConstraints { make in
+        appInfo.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(containerView)
+            make.height.equalTo(containerView.snp.width).multipliedBy(0.33)
+        }
+        appDetail.snp.makeConstraints { make in
+            make.top.equalTo(appInfo.snp.bottom)
+            make.horizontalEdges.equalTo(containerView)
             make.height.equalTo(100)
         }
+        releaseNotes.snp.makeConstraints { make in
+            make.top.equalTo(appDetail.snp.bottom)
+            make.horizontalEdges.equalTo(containerView)
+        }
         testImg.snp.makeConstraints { make in
-            make.top.equalTo(appDetail.snp.bottom).offset(10)
+            make.top.equalTo(releaseNotes.snp.bottom).offset(10)
             make.leading.trailing.equalTo(containerView)
             make.bottom.equalTo(containerView.snp.bottom)
             make.height.equalTo(1000)
