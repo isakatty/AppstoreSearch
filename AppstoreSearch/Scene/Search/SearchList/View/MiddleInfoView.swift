@@ -32,7 +32,7 @@ final class MiddleInfoView: BaseView {
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.spacing = 10
         return stackView
@@ -48,6 +48,10 @@ final class MiddleInfoView: BaseView {
     override func configureLayout() {
         super.configureLayout()
         
+        rateLabel.snp.makeConstraints { make in
+            make.width.equalTo(80)
+            make.height.equalTo(30)
+        }
         stackView.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview()
             make.trailing.equalToSuperview().inset(20)
@@ -56,7 +60,9 @@ final class MiddleInfoView: BaseView {
     }
     
     func configureUI(appInfo: AppStoreSearchResult) {
-        rateLabel.setTitle(String(appInfo.averageUserRating), for: .normal)
+        let text = String(format: "%.2f", appInfo.averageUserRating)
+        
+        rateLabel.setTitle(text, for: .normal)
         devNameLabel.text = appInfo.developerName
         categoryLabel.text = appInfo.genres.first
     }

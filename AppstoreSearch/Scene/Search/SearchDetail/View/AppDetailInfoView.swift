@@ -40,6 +40,7 @@ final class AppDetailInfoView: BaseView {
     }
     override func configureLayout() {
         super.configureLayout()
+        scrollView.showsHorizontalScrollIndicator = false
         
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

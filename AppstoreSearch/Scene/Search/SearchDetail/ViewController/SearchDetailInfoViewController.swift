@@ -11,20 +11,6 @@ import RxSwift
 import RxCocoa
 import SnapKit
 
-/*
- View
- - ScrollView (vertical)
-    - App Info View (앱아이콘, 이름, 설명, 다운로드 버튼)
-    - 평가, 연령, 차트, 개발자, 언어 (horizontal scroll)
-    - release notes
-        - 새로운 소식, 버전, 날짜, 버전 기록(뷰이동 버튼), 폴더블 버튼,
-    - 미리보기 (horizontal scroll)
-        - 스크린 샷
-    - description
-        - 설명 약간, 폴더블 버튼
-        - 개발자 정보 (뷰이동 버튼)
- */
-
 final class SearchDetailInfoViewController: BaseViewController {
     
     let viewModel: SearchDetailInfoViewModel
