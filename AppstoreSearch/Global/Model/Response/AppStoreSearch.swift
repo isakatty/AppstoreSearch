@@ -20,7 +20,7 @@ struct AppStoreSearchResult {
     /// 해당 개발자가 만든 앱들 모음집
     let artistViewUrl: String
     /// 현 버전의 release date
-    let currentVersionReleaseDate: String
+    let currentVersionReleaseDate: Date
     /// release notes
     let releaseNotes: String?
     /// artistId - appStoreId
@@ -30,7 +30,7 @@ struct AppStoreSearchResult {
     /// 앱 카테고리
     let genres: [String]
     /// 처음 앱스토어 등록한 날짜
-    let releaseDate: String
+    let releaseDate: Date
     /// description - 앱 설명
     let appDescription: String
     /// trackName - App Name

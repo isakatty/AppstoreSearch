@@ -87,8 +87,49 @@ final class AppReleaseView: BaseView {
     
     func configureUI(appInfo: AppStoreSearchResult) {
         versionLabel.text = appInfo.version
-        recordDate.text = appInfo.currentVersionReleaseDate // 변환 필요
+        let dif = dateDifference(from: appInfo.currentVersionReleaseDate, to: Date())
+        let difArray = [dif.years, dif.months, dif.weeks, dif.days]
+        let unitLabels = ["년 전", "달 전", "주 전", "일 전"]
+        var timeStrings: [String] = []
+        
+        for (i, value) in difArray.enumerated() {
+            if value != 0 {
+                timeStrings.append("\(value)\(unitLabels[i])")
+            }
+        }
+        let resultString = timeStrings.joined(separator: ", ")
+        recordDate.text = resultString
         releaseDescription.text = appInfo.releaseNotes
     }
-    
+    func dateDifference(
+        from startDate: Date,
+        to endDate: Date
+    ) -> (years: Int, months: Int, weeks: Int, days: Int) {
+        let calendar = Calendar.current
+        
+        let totalDays = calendar.dateComponents([.day], from: startDate, to: endDate).day ?? 0
+        
+        let daysInYear = 365
+        let daysInMonth = 30
+        let daysInWeek = 7
+        
+        let years = totalDays / daysInYear
+        let remainingDaysAfterYears = totalDays % daysInYear
+        
+        let months = remainingDaysAfterYears / daysInMonth
+        let remainingDaysAfterMonths = remainingDaysAfterYears % daysInMonth
+        
+        let weeks = remainingDaysAfterMonths / daysInWeek
+        let days = remainingDaysAfterMonths % daysInWeek
+        
+        if years > 0 {
+            return (years, 0, 0, 0)
+        } else if months > 0 {
+            return (0, months, 0, 0)
+        } else if weeks > 0 {
+            return (0, 0, weeks, 0)
+        } else {
+            return (0, 0, 0, days)
+        }
+    }
 }

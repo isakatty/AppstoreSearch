@@ -56,13 +56,13 @@ struct AppStoreSearchResultDTO: Decodable {
     let artistViewUrl: String
     let kind: String
     let currency: String
-    let currentVersionReleaseDate: String // iso8601
+    let currentVersionReleaseDate: Date // iso8601
     let releaseNotes: String?
     let artistId: Int
     let artistName: String
     let genres: [String]
     let price: Double
-    let releaseDate: String
+    let releaseDate: Date
     let genreIds: [String]
     let description: String
     let bundleId: String

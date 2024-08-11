@@ -38,8 +38,11 @@ final class NetworkManager {
                     return
                 }
                 
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                
                 if let data,
-                   let result = try? JSONDecoder().decode(T.self, from: data) {
+                   let result = try? decoder.decode(T.self, from: data) {
                     observer.onNext(result)
                     observer.onCompleted()
                 } else {
