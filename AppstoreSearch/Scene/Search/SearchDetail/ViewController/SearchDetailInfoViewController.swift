@@ -38,15 +38,8 @@ final class SearchDetailInfoViewController: BaseViewController {
     private let appInfo = AppInfoView()
     private let appDetail = AppDetailInfoView()
     private let releaseNotes = AppReleaseView()
-    private let testImg: UIImageView = {
-        let img = UIImageView()
-        img.contentMode = .scaleAspectFit
-        img.clipsToBounds = true
-        img.image = UIImage(systemName: "star.fill")
-        img.backgroundColor = .red
-        img.tintColor = .white
-        return img
-    }()
+    private let screenshotCollectionView = AppScreenshotView()
+    private let appDescription = AppDescriptionView()
     
     init(viewModel: SearchDetailInfoViewModel) {
         self.viewModel = viewModel
@@ -58,6 +51,7 @@ final class SearchDetailInfoViewController: BaseViewController {
         super.viewDidLoad()
         
         print(viewModel.appInfo.appName)
+        bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,7 +64,7 @@ final class SearchDetailInfoViewController: BaseViewController {
         view.addSubview(vScrollView)
         vScrollView.addSubview(containerView)
         
-        [appInfo, appDetail, releaseNotes, testImg]
+        [appInfo, appDetail, releaseNotes, screenshotCollectionView, appDescription]
             .forEach { containerView.addSubview($0) }
     }
     override func configureLayout() {
@@ -96,11 +90,17 @@ final class SearchDetailInfoViewController: BaseViewController {
             make.top.equalTo(appDetail.snp.bottom)
             make.horizontalEdges.equalTo(containerView)
         }
-        testImg.snp.makeConstraints { make in
-            make.top.equalTo(releaseNotes.snp.bottom).offset(10)
-            make.leading.trailing.equalTo(containerView)
-            make.bottom.equalTo(containerView.snp.bottom)
-            make.height.equalTo(1000)
+        screenshotCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(releaseNotes.snp.bottom)
+            make.horizontalEdges.equalTo(containerView)
         }
+        appDescription.snp.makeConstraints { make in
+            make.top.equalTo(screenshotCollectionView.snp.bottom)
+            make.horizontalEdges.bottom.equalTo(containerView)
+        }
+    }
+    
+    private func bind() {
+        
     }
 }

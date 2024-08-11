@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C9024C812C6853E800B3D882 /* DetailMiddleImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9024C802C6853E800B3D882 /* DetailMiddleImgView.swift */; };
 		C9024C832C6853F600B3D882 /* DetailBottomImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9024C822C6853F600B3D882 /* DetailBottomImgView.swift */; };
+		C9024C852C68A62700B3D882 /* AppScreenshotCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9024C842C68A62700B3D882 /* AppScreenshotCollectionViewCell.swift */; };
 		C91969642C65B4C30013B845 /* mockSearchiTunesAPI.json in Resources */ = {isa = PBXBuildFile; fileRef = C91969632C65B4C30013B845 /* mockSearchiTunesAPI.json */; };
 		C91969692C65BE160013B845 /* AppStoreSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91969682C65BE160013B845 /* AppStoreSearch.swift */; };
 		C919696B2C65C4C70013B845 /* SearchiTunesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C919696A2C65C4C70013B845 /* SearchiTunesViewModel.swift */; };
@@ -57,6 +58,7 @@
 /* Begin PBXFileReference section */
 		C9024C802C6853E800B3D882 /* DetailMiddleImgView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMiddleImgView.swift; sourceTree = "<group>"; };
 		C9024C822C6853F600B3D882 /* DetailBottomImgView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBottomImgView.swift; sourceTree = "<group>"; };
+		C9024C842C68A62700B3D882 /* AppScreenshotCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScreenshotCollectionViewCell.swift; sourceTree = "<group>"; };
 		C91969632C65B4C30013B845 /* mockSearchiTunesAPI.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mockSearchiTunesAPI.json; sourceTree = "<group>"; };
 		C91969682C65BE160013B845 /* AppStoreSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreSearch.swift; sourceTree = "<group>"; };
 		C919696A2C65C4C70013B845 /* SearchiTunesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchiTunesViewModel.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				C91D9AF02C67B7AA004A4DC1 /* AppScreenshotView.swift */,
 				C91D9AEE2C67B79A004A4DC1 /* AppReleaseView.swift */,
 				C91D9AF22C67B7B3004A4DC1 /* AppDescriptionView.swift */,
+				C9024C842C68A62700B3D882 /* AppScreenshotCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				C91969792C65E7450013B845 /* MiddleInfoView.swift in Sources */,
 				C919696F2C65D6300013B845 /* SearchListTableViewCell.swift in Sources */,
 				C91D9AE12C676257004A4DC1 /* SearchDetailInfoViewController.swift in Sources */,
+				C9024C852C68A62700B3D882 /* AppScreenshotCollectionViewCell.swift in Sources */,
 				C91D9AF52C685044004A4DC1 /* AppDetailInfoView.swift in Sources */,
 				C91969752C65E2910013B845 /* SearchListCollectionViewCell.swift in Sources */,
 				C94A15D12C64F328003A94AE /* TabBarController.swift in Sources */,
