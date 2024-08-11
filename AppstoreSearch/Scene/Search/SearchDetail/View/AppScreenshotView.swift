@@ -58,17 +58,26 @@ final class AppScreenshotView: BaseView {
 }
 extension AppScreenshotView {
     private func layout() -> UICollectionViewLayout {
-        let layout = UICollectionViewLayout()
-        let leadingItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
+        let leadingItem = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .fractionalHeight(1.0)
+            )
+        )
         leadingItem.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         
         let containerGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7),
-                                               heightDimension: .fractionalHeight(0.4)),
-            subitems: [leadingItem])
+            layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(0.6),
+                heightDimension: .fractionalHeight(1.0)
+            ),
+            subitems: [leadingItem]
+        )
+        
         let section = NSCollectionLayoutSection(group: containerGroup)
-        section.orthogonalScrollingBehavior = .groupPagingCentered
+        section.orthogonalScrollingBehavior = .groupPaging
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
 }

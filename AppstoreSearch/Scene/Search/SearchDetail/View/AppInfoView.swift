@@ -14,14 +14,12 @@ final class AppInfoView: BaseView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textColor = .black
-        label.text = "카카오뱅크"
         return label
     }()
     private let appIconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .systemMint
         imageView.layer.cornerRadius = 16
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor.lightGray.cgColor
@@ -42,7 +40,6 @@ final class AppInfoView: BaseView {
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 13)
         label.textColor = .lightGray
-        label.text = "Kakao Corp."
         return label
     }()
     override func configureHierarchy() {

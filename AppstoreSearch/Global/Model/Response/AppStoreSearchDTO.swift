@@ -22,6 +22,7 @@ extension AppStoreSearchDTO {
                     screenshotUrls: dto.screenshotUrls,
                     artistViewUrl: dto.artistViewUrl,
                     currentVersionReleaseDate: dto.currentVersionReleaseDate,
+                    releaseNotes: dto.releaseNotes,
                     developrId: dto.artistId,
                     developerName: dto.artistName,
                     genres: dto.genres,
@@ -35,7 +36,9 @@ extension AppStoreSearchDTO {
                     linkToAppStore: dto.trackViewUrl,
                     minimumOsVersion: dto.minimumOsVersion,
                     version: dto.version,
-                    artworkURL: dto.artworkUrl512
+                    artworkURL: dto.artworkUrl512,
+                    languages: dto.languageCodesISO2A,
+                    rateCount: dto.userRatingCountForCurrentVersion
                 )
             })
         )

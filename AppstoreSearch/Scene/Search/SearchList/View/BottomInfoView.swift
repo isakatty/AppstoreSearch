@@ -17,7 +17,6 @@ final class BottomInfoView: BaseView {
         image.layer.borderWidth = 1
         image.layer.borderColor = UIColor.lightGray.cgColor
         image.contentMode = .scaleToFill
-        image.backgroundColor = .systemYellow
         return image
     }()
     private let secondImg: UIImageView = {
@@ -27,7 +26,6 @@ final class BottomInfoView: BaseView {
         image.layer.borderWidth = 1
         image.layer.borderColor = UIColor.lightGray.cgColor
         image.contentMode = .scaleToFill
-        image.backgroundColor = .systemYellow
         return image
     }()
     private let thirdImg: UIImageView = {
@@ -37,7 +35,6 @@ final class BottomInfoView: BaseView {
         image.layer.borderWidth = 1
         image.layer.borderColor = UIColor.lightGray.cgColor
         image.contentMode = .scaleToFill
-        image.backgroundColor = .systemYellow
         return image
     }()
     

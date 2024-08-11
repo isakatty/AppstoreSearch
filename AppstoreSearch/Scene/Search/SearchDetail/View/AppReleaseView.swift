@@ -22,7 +22,6 @@ final class AppReleaseView: BaseView {
         label.textColor = .lightGray
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 14)
-        label.text = "버전 2.8.0"
         return label
     }()
     private let versionRecordBtn: UIButton = {
@@ -35,25 +34,14 @@ final class AppReleaseView: BaseView {
         label.textColor = .lightGray
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 14)
-        label.text = "3주 전"
         return label
     }()
-    private let releaseDescription: UITextView = {
-        let view = UITextView()
-        view.font = .systemFont(ofSize: 15)
-        view.textAlignment = .left
-        view.isScrollEnabled = false
-        view.isEditable = false
-        view.isSelectable = false
-        view.textContainerInset = .zero
-        view.textContainer.lineFragmentPadding = 10
-        view.backgroundColor = .clear
-        view.text =
-"""
-- 인증 관련 기능 개선
-- 화면 표출 기능 개선
-"""
-        return view
+    private let releaseDescription: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14)
+        label.textAlignment = .left
+        label.numberOfLines = .zero
+        return label
     }()
     
     private let seperateBar: UIView = {
@@ -95,6 +83,12 @@ final class AppReleaseView: BaseView {
             make.height.equalTo(1)
             make.bottom.equalToSuperview().inset(4)
         }
+    }
+    
+    func configureUI(appInfo: AppStoreSearchResult) {
+        versionLabel.text = appInfo.version
+        recordDate.text = appInfo.currentVersionReleaseDate // 변환 필요
+        releaseDescription.text = appInfo.releaseNotes
     }
     
 }

@@ -11,6 +11,7 @@ import SnapKit
 
 final class DetailMiddleImgView: BaseView {
     var isHiddenBar: Bool
+    var topLabelText: String
     
     private let vSeperateBar: UIView = {
         let view = UIView()
@@ -22,7 +23,6 @@ final class DetailMiddleImgView: BaseView {
         label.font = .systemFont(ofSize: 14, weight: .bold)
         label.textColor = .lightGray
         label.textAlignment = .center
-        label.text = "개발자"
         return label
     }()
     private let middleImageView: UIImageView = {
@@ -38,12 +38,16 @@ final class DetailMiddleImgView: BaseView {
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .lightGray
         label.textAlignment = .center
-        label.text = "Kakao Corp."
+        label.numberOfLines = .zero
         return label
     }()
     
-    init(isHiddenBar: Bool = false) {
+    init(isHiddenBar: Bool = false, topLabelText: String) {
         self.isHiddenBar = isHiddenBar
+        self.topLabelText = topLabelText
+        
+        topLabel.text = topLabelText
+        
         super.init(frame: .zero)
     }
     
@@ -71,9 +75,14 @@ final class DetailMiddleImgView: BaseView {
         bottomLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-16)
-            make.top.equalTo(middleImageView.snp.bottom).offset(2)
+            make.top.equalTo(middleImageView.snp.bottom).offset(4)
+            make.horizontalEdges.equalToSuperview().inset(4)
         }
         
         vSeperateBar.isHidden = isHiddenBar
+    }
+    
+    func configureUI(appInfo: AppStoreSearchResult) {
+        bottomLabel.text = appInfo.sellerName
     }
 }

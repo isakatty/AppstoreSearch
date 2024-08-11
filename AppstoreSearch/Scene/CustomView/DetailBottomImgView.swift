@@ -22,7 +22,6 @@ final class DetailBottomImgView: BaseView {
         label.font = .systemFont(ofSize: 14, weight: .bold)
         label.textColor = .lightGray
         label.textAlignment = .center
-        label.text = "380개의 평가"
         return label
     }()
     private let middleLabel: UILabel = {
@@ -30,7 +29,6 @@ final class DetailBottomImgView: BaseView {
         label.font = .systemFont(ofSize: 18, weight: .heavy)
         label.textColor = .lightGray
         label.textAlignment = .center
-        label.text = "1.4"
         return label
     }()
     private let bottomImageView: UIImageView = {
@@ -75,5 +73,27 @@ final class DetailBottomImgView: BaseView {
             make.width.lessThanOrEqualToSuperview().offset(-40)
         }
         vSeperateBar.isHidden = isHiddenBar
+    }
+    
+    func configureUI(appInfo: AppStoreSearchResult) {
+        topLabel.text = "\(formatNumber(appInfo.rateCount))개의 평가"
+        middleLabel.text = String(format: "%.1f", appInfo.averageUserRating)
+    }
+    func formatNumber(_ number: Int) -> String {
+        if number >= 10000 {
+            let manUnit = number / 10000
+            let thousandUnit = (number % 10000) / 1000
+            
+            if thousandUnit > 0 {
+                return "\(manUnit).\(thousandUnit)만"
+            } else {
+                return "\(manUnit)만"
+            }
+        } else if number >= 1000 {
+            let thousandUnit = number / 1000
+            return "\(thousandUnit)천"
+        } else {
+            return "\(number)"
+        }
     }
 }

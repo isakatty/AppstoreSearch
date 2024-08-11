@@ -30,16 +30,15 @@ final class SearchDetailInfoViewController: BaseViewController {
     let viewModel: SearchDetailInfoViewModel
     
     private let vScrollView = UIScrollView()
-    private let containerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemMint
-        return view
-    }()
+    private let containerView = UIView()
+    
     private let appInfo = AppInfoView()
     private let appDetail = AppDetailInfoView()
     private let releaseNotes = AppReleaseView()
     private let screenshotCollectionView = AppScreenshotView()
     private let appDescription = AppDescriptionView()
+    
+    private var disposeBag = DisposeBag()
     
     init(viewModel: SearchDetailInfoViewModel) {
         self.viewModel = viewModel
@@ -50,7 +49,6 @@ final class SearchDetailInfoViewController: BaseViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(viewModel.appInfo.appName)
         bind()
     }
     
@@ -101,6 +99,23 @@ final class SearchDetailInfoViewController: BaseViewController {
     }
     
     private func bind() {
+        let input = SearchDetailInfoViewModel.Input()
+        let output = viewModel.transform(input: input)
         
+        output.appInfo
+            .bind(with: self) { owner, appInfo in
+                owner.appInfo.configureUI(appInfo: appInfo)
+                owner.appDetail.configureUI(appInfo: appInfo)
+                owner.releaseNotes.configureUI(appInfo: appInfo)
+                owner.appDescription.configureUI(appInfo: appInfo)
+            }
+            .disposed(by: disposeBag)
+        
+        output.appInfo
+            .map { $0.screenshotUrls }
+            .bind(to: screenshotCollectionView.collectionView.rx.items(cellIdentifier: AppScreenshotCollectionViewCell.identifier, cellType: AppScreenshotCollectionViewCell.self)) { row, element, cell in
+                cell.configureUI(imageURL: element)
+            }
+            .disposed(by: disposeBag)
     }
 }

@@ -17,7 +17,7 @@ final class AppScreenshotCollectionViewCell: BaseCollectionViewCell {
     private let imageView: UIImageView = {
         let view = UIImageView()
         view.clipsToBounds = true
-        view.contentMode = .scaleAspectFill
+        view.contentMode = .scaleAspectFit
         view.layer.cornerRadius = 10
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.lightGray.cgColor
@@ -31,14 +31,23 @@ final class AppScreenshotCollectionViewCell: BaseCollectionViewCell {
         super.configureLayout()
         
         imageView.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview()
-            make.verticalEdges.equalToSuperview().inset(8)
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    func configureUI(imageURL: String) {
+        loadAsyncImages(link: imageURL) { [weak self] image in
+            guard let self else { return }
+            DispatchQueue.main.async {
+                self.imageView.image = image
+            }
         }
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
+        imageView.image = nil
         disposeBag = DisposeBag()
     }
 }

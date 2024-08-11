@@ -11,6 +11,8 @@ import SnapKit
 
 final class DetailLabelView: BaseView {
     var isHiddenBar: Bool
+    var topText: String
+    var bottomText: String?
     
     private let vSeperateBar: UIView = {
         let view = UIView()
@@ -21,7 +23,6 @@ final class DetailLabelView: BaseView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .bold)
         label.textAlignment = .center
-        label.text = "연령"
         label.textColor = .lightGray
         return label
     }()
@@ -29,7 +30,6 @@ final class DetailLabelView: BaseView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .heavy)
         label.textAlignment = .center
-        label.text = "4+"
         label.textColor = .lightGray
         return label
     }()
@@ -37,18 +37,21 @@ final class DetailLabelView: BaseView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textAlignment = .center
-        label.text = "세"
         label.textColor = .lightGray
         return label
     }()
     
     
-    init(isHiddenBar: Bool = false) {
+    init(isHiddenBar: Bool = false, topText: String, bottomText: String?) {
         self.isHiddenBar = isHiddenBar
+        self.topText = topText
+        self.bottomText = bottomText
+        
+        topLabel.text = topText
+        bottomLabel.text = bottomText
         
         super.init(frame: .zero)
     }
-    
     
     override func configureHierarchy() {
         [vSeperateBar, topLabel, middleLabel, bottomLabel]
@@ -78,4 +81,16 @@ final class DetailLabelView: BaseView {
         vSeperateBar.isHidden = isHiddenBar
     }
     
+    func configureUI(appInfo: AppStoreSearchResult) {
+        if bottomText == nil {
+            if topText == "언어" {
+                middleLabel.text = appInfo.languages.first
+                let bottomText = appInfo.languages.count
+                bottomLabel.text = "+ \(bottomText)개의 언어"
+            }
+        } else {
+            middleLabel.text = appInfo.contentAdvisoryRating
+            bottomLabel.text = bottomText
+        }
+    }
 }

@@ -174,8 +174,8 @@
 			children = (
 				C91D9AEC2C67B789004A4DC1 /* AppInfoView.swift */,
 				C91D9AF42C685044004A4DC1 /* AppDetailInfoView.swift */,
-				C91D9AF02C67B7AA004A4DC1 /* AppScreenshotView.swift */,
 				C91D9AEE2C67B79A004A4DC1 /* AppReleaseView.swift */,
+				C91D9AF02C67B7AA004A4DC1 /* AppScreenshotView.swift */,
 				C91D9AF22C67B7B3004A4DC1 /* AppDescriptionView.swift */,
 				C9024C842C68A62700B3D882 /* AppScreenshotCollectionViewCell.swift */,
 			);

@@ -21,6 +21,8 @@ struct AppStoreSearchResult {
     let artistViewUrl: String
     /// 현 버전의 release date
     let currentVersionReleaseDate: String
+    /// release notes
+    let releaseNotes: String?
     /// artistId - appStoreId
     let developrId: Int
     /// artistName - 개발자 이름
@@ -49,4 +51,8 @@ struct AppStoreSearchResult {
     let version: String
     /// app logo
     let artworkURL: String
+    /// 앱 언어
+    let languages: [String]
+    /// 평가 개수
+    let rateCount: Int
 }
