@@ -68,6 +68,7 @@ final class BottomInfoView: BaseView {
     }
     
     func configureUI(appInfo: AppStoreSearchResult) {
+        // TODO: screenshotUrls 개수 확인해야함.
         loadAsyncImages(link: appInfo.screenshotUrls[0], completionHandler: { [weak self] image in
             guard let self else { return }
             DispatchQueue.main.async {
